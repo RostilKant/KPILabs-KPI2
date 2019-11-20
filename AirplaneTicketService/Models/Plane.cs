@@ -16,4 +16,16 @@ namespace AirplaneTicketService.Models
         [DataType(DataType.Date)]
         public DateTime DayOfLastRepair { get; set; }
     }
+    public class Employee
+    {
+        public Plane Plane { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        public string Phone { get; set; }
+    }
 }

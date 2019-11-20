@@ -11,8 +11,13 @@ namespace AirplaneTicketService.Data
     {
         public DbSet<Plane> Planes { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Flight> Flights { get; set; }
+        public DbSet<FlightDetails> FlightDetails { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<TicketDetails> TicketDetails { get; set; }
         public ApplicationContext()
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
@@ -24,6 +29,8 @@ namespace AirplaneTicketService.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder?.Entity<Employee>().HasNoKey();
+            modelBuilder?.Entity<FlightDetails>().HasNoKey();
+            modelBuilder?.Entity<TicketDetails>().HasNoKey();
         }
     }
 }
