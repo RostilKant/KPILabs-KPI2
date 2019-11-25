@@ -4,14 +4,16 @@ using AirplaneTicketService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AirplaneTicketService.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20191123140302_InitLast")]
+    partial class InitLast
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +39,11 @@ namespace AirplaneTicketService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Passport")
+                    b.Property<string>("PassportNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassportSerial")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -47,6 +53,31 @@ namespace AirplaneTicketService.Migrations
                     b.HasKey("ClientId");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("AirplaneTicketService.Models.Employee", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PlaneId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("PlaneId");
+
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("AirplaneTicketService.Models.Flight", b =>
@@ -68,15 +99,8 @@ namespace AirplaneTicketService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FirstPilot")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("PlaneId")
                         .HasColumnType("int");
-
-                    b.Property<string>("SecondPilot")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -86,6 +110,39 @@ namespace AirplaneTicketService.Migrations
                     b.HasIndex("PlaneId");
 
                     b.ToTable("Flights");
+                });
+
+            modelBuilder.Entity("AirplaneTicketService.Models.FlightDetails", b =>
+                {
+                    b.Property<string>("ArriveCity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArriveCountry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartureCity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartureCountry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstPilot")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FlightId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecondPilot")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("FlightId");
+
+                    b.ToTable("FlightDetails");
                 });
 
             modelBuilder.Entity("AirplaneTicketService.Models.Plane", b =>
@@ -114,28 +171,6 @@ namespace AirplaneTicketService.Migrations
                     b.ToTable("Planes");
                 });
 
-            modelBuilder.Entity("AirplaneTicketService.Models.Registration", b =>
-                {
-                    b.Property<int>("RegistrationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ClientId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TicketId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RegistrationId");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("TicketId");
-
-                    b.ToTable("Registrations");
-                });
-
             modelBuilder.Entity("AirplaneTicketService.Models.Ticket", b =>
                 {
                     b.Property<int>("TicketId")
@@ -143,23 +178,11 @@ namespace AirplaneTicketService.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BagsCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Class")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Column")
-                        .HasColumnType("int");
-
                     b.Property<int?>("FlightId")
                         .HasColumnType("int");
 
                     b.Property<long>("Price")
                         .HasColumnType("bigint");
-
-                    b.Property<int>("Row")
-                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -172,6 +195,36 @@ namespace AirplaneTicketService.Migrations
                     b.ToTable("Tickets");
                 });
 
+            modelBuilder.Entity("AirplaneTicketService.Models.TicketDetails", b =>
+                {
+                    b.Property<int>("BagsCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Column")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Row")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TicketId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("TicketDetails");
+                });
+
+            modelBuilder.Entity("AirplaneTicketService.Models.Employee", b =>
+                {
+                    b.HasOne("AirplaneTicketService.Models.Plane", "Plane")
+                        .WithMany()
+                        .HasForeignKey("PlaneId");
+                });
+
             modelBuilder.Entity("AirplaneTicketService.Models.Flight", b =>
                 {
                     b.HasOne("AirplaneTicketService.Models.Plane", "Plane")
@@ -179,15 +232,11 @@ namespace AirplaneTicketService.Migrations
                         .HasForeignKey("PlaneId");
                 });
 
-            modelBuilder.Entity("AirplaneTicketService.Models.Registration", b =>
+            modelBuilder.Entity("AirplaneTicketService.Models.FlightDetails", b =>
                 {
-                    b.HasOne("AirplaneTicketService.Models.Client", "Client")
+                    b.HasOne("AirplaneTicketService.Models.Flight", "Flight")
                         .WithMany()
-                        .HasForeignKey("ClientId");
-
-                    b.HasOne("AirplaneTicketService.Models.Ticket", "Ticket")
-                        .WithMany()
-                        .HasForeignKey("TicketId");
+                        .HasForeignKey("FlightId");
                 });
 
             modelBuilder.Entity("AirplaneTicketService.Models.Ticket", b =>
@@ -195,6 +244,13 @@ namespace AirplaneTicketService.Migrations
                     b.HasOne("AirplaneTicketService.Models.Flight", "Flight")
                         .WithMany()
                         .HasForeignKey("FlightId");
+                });
+
+            modelBuilder.Entity("AirplaneTicketService.Models.TicketDetails", b =>
+                {
+                    b.HasOne("AirplaneTicketService.Models.Ticket", "Ticket")
+                        .WithMany()
+                        .HasForeignKey("TicketId");
                 });
 #pragma warning restore 612, 618
         }

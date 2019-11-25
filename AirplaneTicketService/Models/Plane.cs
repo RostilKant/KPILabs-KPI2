@@ -9,23 +9,31 @@ namespace AirplaneTicketService.Models
     public class Plane
     {
         public int PlaneId { get; set; }
+        [Required]
         public string Country { get; set; }
+        [Required]
         public string Company { get; set; }
+        [Required]
         public uint NumOfSeats { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime DayOfLastRepair { get; set; }
     }
-    public class Employee
-    {
-        public Plane Plane { get; set; }
-        public string FName { get; set; }
-        public string LName { get; set; }
+    //public class Employee
+    //{
+    //    public Plane Plane { get; set; }
 
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+    //    [Required]
+    //    public string FName { get; set; }
 
-        [DataType(DataType.PhoneNumber)]
-        public string Phone { get; set; }
-    }
+    //    [Required]
+    //    public string LName { get; set; }
+
+    //    [DataType(DataType.EmailAddress)]
+    //    public string Email { get; set; }
+
+    //    [Required]
+    //    [DataType(DataType.PhoneNumber)]
+    //    public string Phone { get; set; }
+    //}
 }
