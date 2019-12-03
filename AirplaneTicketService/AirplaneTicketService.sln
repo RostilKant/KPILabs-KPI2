@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirplaneTicketService", "AirplaneTicketService.csproj", "{9E4FB5B8-85EA-4CDD-8338-173E618DDBE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supplier1", "..\Supplier1\Supplier1.csproj", "{D5C36A08-6F73-4FF4-BA69-DD041A98088D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Supplier1", "..\Supplier1\Supplier1.csproj", "{D5C36A08-6F73-4FF4-BA69-DD041A98088D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supplier2", "..\Supplier2\Supplier2.csproj", "{0913F4FB-6BC7-4E3A-8B0A-797E62F3C487}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D5C36A08-6F73-4FF4-BA69-DD041A98088D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5C36A08-6F73-4FF4-BA69-DD041A98088D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5C36A08-6F73-4FF4-BA69-DD041A98088D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0913F4FB-6BC7-4E3A-8B0A-797E62F3C487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0913F4FB-6BC7-4E3A-8B0A-797E62F3C487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0913F4FB-6BC7-4E3A-8B0A-797E62F3C487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0913F4FB-6BC7-4E3A-8B0A-797E62F3C487}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

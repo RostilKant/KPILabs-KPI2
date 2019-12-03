@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Supplier1;
+using Supplier2;
 
-namespace Supplier1.Migrations
+namespace Supplier2.Migrations
 {
-    [DbContext(typeof(FSupplierContext))]
-    partial class FSupplierContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SSupplierContext))]
+    partial class SSupplierContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -18,7 +18,7 @@ namespace Supplier1.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Supplier1.Flight", b =>
+            modelBuilder.Entity("Supplier2.Flight", b =>
                 {
                     b.Property<int>("FlightId")
                         .ValueGeneratedOnAdd()
@@ -52,7 +52,7 @@ namespace Supplier1.Migrations
                     b.ToTable("Flight");
                 });
 
-            modelBuilder.Entity("Supplier1.Ticket", b =>
+            modelBuilder.Entity("Supplier2.Ticket", b =>
                 {
                     b.Property<int>("TicketId")
                         .ValueGeneratedOnAdd()
@@ -88,9 +88,9 @@ namespace Supplier1.Migrations
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("Supplier1.Ticket", b =>
+            modelBuilder.Entity("Supplier2.Ticket", b =>
                 {
-                    b.HasOne("Supplier1.Flight", "Flight")
+                    b.HasOne("Supplier2.Flight", "Flight")
                         .WithMany("Tickets")
                         .HasForeignKey("FlightId")
                         .OnDelete(DeleteBehavior.Cascade)
