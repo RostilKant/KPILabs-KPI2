@@ -4,13 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AirplaneTicketService.Models
+namespace Supplier1
 {
     public class Flight
     {
         public int FlightId { get; set; }
-        public int PlaneId { get; set; }
-        public Plane Plane { get; set; }
         [Required]
         public string ArriveAirport { get; set; }
         [Required]
@@ -23,20 +21,4 @@ namespace AirplaneTicketService.Models
         public string SecondPilot { get; set; }
         public List<Ticket> Tickets { get; set; }
     }
-        
-    //public class FlightDetails
-    //{
-    //    public Flight Flight { get; set; }
-    //    [Required]
-    //    public string ArriveCountry { get; set; }
-    //    [Required]
-    //    public string ArriveCity { get; set; }
-    //    [Required]
-    //    public string DepartureCountry { get; set; }
-    //    [Required]
-    //    public string DepartureCity { get; set; }
-    //    [Required]
-    //    public string FirstPilot { get; set; }
-    //    public string SecondPilot { get; set; }
-    //}
 }

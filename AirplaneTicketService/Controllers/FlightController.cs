@@ -6,41 +6,38 @@ namespace AirplaneTicketService.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class FlightController : ControllerBase
     {
         UnityOfWork uow;
-        public ClientController(UnityOfWork uow)
+        public FlightController(UnityOfWork uow)
         {
             this.uow = uow;
         }
-
-        //[Route("Clients")]
-        // GET: /Client
+        // GET: api/Flight
         [HttpGet]
-        public async Task<IActionResult> Clients()
+        public async Task<IActionResult> Flights()
         {
             try
             {
-                var clients = await uow.Clients.RetrieveAll().ConfigureAwait(false);
-                if(clients == null)
+                var flights = await uow.Flights.RetrieveAll().ConfigureAwait(false);
+                if (flights == null)
                 {
                     return NotFound();
                 }
-                return Ok(clients);
+                return Ok(flights);
             }
             catch (Exception)
             {
                 return BadRequest();
             }
         }
-        [Route("Passport")]
-        //[HttpGet("{id}", Name = "Get")]
+        [Route("Departure")]
         [HttpGet]
-        public async Task<IActionResult> GetClientsByPassport(string passport)
+        public async Task<IActionResult> Flights(string airport)
         {
             try
             {
-                var clients = await uow.Clients.GetClientsByPassport(passport).ConfigureAwait(false);
+                var clients = await uow.Flights.GetFlightsByDeparture(airport).ConfigureAwait(false);
                 if (clients == null)
                 {
                     return NotFound();
@@ -52,14 +49,14 @@ namespace AirplaneTicketService.Controllers
                 return BadRequest();
             }
         }
-        // GET: /Client/5
-        [HttpGet("{id}", Name = "Client")]
-        public async Task<IActionResult> GetClient(int id)
+        // GET: api/Flight/5
+        [HttpGet("{id}", Name = "Get")]
+        public async Task<IActionResult> GetFlight(int id)
         {
             try
             {
-                var nClient = await uow.Clients.Retrieve(id).ConfigureAwait(false);
-                if(nClient == null)
+                var nClient = await uow.Flights.Retrieve(id).ConfigureAwait(false);
+                if (nClient == null)
                 {
                     return NotFound();
                 }
@@ -71,28 +68,27 @@ namespace AirplaneTicketService.Controllers
             }
         }
 
-        // POST: api/Client
+        // POST: api/Flight
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Models.Client nClient)
+        public async Task<IActionResult> Post([FromBody] Models.Flight nflight )
         {
             if (ModelState.IsValid)
             {
-                var newClient = await uow.Clients.Create(nClient).ConfigureAwait(false);
-                return Ok(newClient);
+                var newFlight = await uow.Flights.Create(nflight).ConfigureAwait(false);
+                return Ok(newFlight);
             }
             return BadRequest();
-
         }
 
-        // PUT: api/Client/5
+        // PUT: api/Flight/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Models.Client nClient)
+        public async Task<IActionResult> Put(int id, [FromBody] Models.Flight nFlight)
         {
             if (ModelState.IsValid)
             {
-                if (id == nClient.ClientId)
+                if (id == nFlight.FlightId)
                 {
-                    await uow.Clients.Update(nClient).ConfigureAwait(false);
+                    await uow.Flights.Update(nFlight).ConfigureAwait(false);
                     return Ok();
                 }
             }
@@ -104,24 +100,23 @@ namespace AirplaneTicketService.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             int result = 0;
-            if(id == 0)
+            if (id == 0)
             {
                 return BadRequest();
             }
             try
             {
-                result = await uow.Clients.Delete(id).ConfigureAwait(false);
-                if(result == 0)
+                result = await uow.Flights.Delete(id).ConfigureAwait(false);
+                if (result == 0)
                 {
                     return NotFound();
                 }
-                return Ok();    
+                return Ok();
             }
             catch (Exception)
             {
                 return BadRequest();
             }
-
         }
     }
 }

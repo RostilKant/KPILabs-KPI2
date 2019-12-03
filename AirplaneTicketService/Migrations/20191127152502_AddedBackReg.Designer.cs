@@ -4,14 +4,16 @@ using AirplaneTicketService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AirplaneTicketService.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20191127152502_AddedBackReg")]
+    partial class AddedBackReg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +74,7 @@ namespace AirplaneTicketService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PlaneId")
+                    b.Property<int?>("PlaneId")
                         .HasColumnType("int");
 
                     b.Property<string>("SecondPilot")
@@ -152,7 +154,7 @@ namespace AirplaneTicketService.Migrations
                     b.Property<int>("Column")
                         .HasColumnType("int");
 
-                    b.Property<int>("FlightId")
+                    b.Property<int?>("FlightId")
                         .HasColumnType("int");
 
                     b.Property<long>("Price")
@@ -175,10 +177,8 @@ namespace AirplaneTicketService.Migrations
             modelBuilder.Entity("AirplaneTicketService.Models.Flight", b =>
                 {
                     b.HasOne("AirplaneTicketService.Models.Plane", "Plane")
-                        .WithMany("Flights")
-                        .HasForeignKey("PlaneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("PlaneId");
                 });
 
             modelBuilder.Entity("AirplaneTicketService.Models.Registration", b =>
@@ -195,10 +195,8 @@ namespace AirplaneTicketService.Migrations
             modelBuilder.Entity("AirplaneTicketService.Models.Ticket", b =>
                 {
                     b.HasOne("AirplaneTicketService.Models.Flight", "Flight")
-                        .WithMany("Tickets")
-                        .HasForeignKey("FlightId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("FlightId");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,12 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <StartupObject>AirplaneTicketService.Program</StartupObject>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Migrations\20191125135028_AddNewDb.cs" />
     <Compile Remove="Migrations\20191125135028_AddNewDb.Designer.cs" />
+    <Compile Remove="Migrations\20191127155549_AddPlanes.cs" />
+    <Compile Remove="Migrations\20191127155549_AddPlanes.Designer.cs" />
+    <Compile Remove="Migrations\20191127160008_smth.cs" />
+    <Compile Remove="Migrations\20191127160008_smth.Designer.cs" />
+    <Compile Remove="Migrations\20191203113221_initSupp1.cs" />
+    <Compile Remove="Migrations\20191203113221_initSupp1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

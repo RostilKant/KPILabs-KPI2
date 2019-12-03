@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AirplaneTicketService.Models
+namespace Supplier1
 {
     public class Ticket
     {
@@ -23,6 +23,4 @@ namespace AirplaneTicketService.Models
         [Required]
         public int Column { get; set; }
     }
-
-   
 }

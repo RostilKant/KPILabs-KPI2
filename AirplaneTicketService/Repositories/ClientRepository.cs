@@ -4,18 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using AirplaneTicketService.Data;
 using AirplaneTicketService.Models;
+using AirplaneTicketService.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace AirplaneTicketService.NewFolder
 {
-    public class Client : IClient
+    public class ClientRepository : IRepository<Client>
     {
         ApplicationContext context;
-        public Client(ApplicationContext _context)
+        public ClientRepository(ApplicationContext context)
         {
-            context = _context;
+            this.context = context;
         }
-        public async Task<Models.Client> AddClient(Models.Client client)
+        public async Task<Client> Create(Client client)
         {
             if (context != null)
             {
@@ -26,8 +27,8 @@ namespace AirplaneTicketService.NewFolder
             }
             return null;
         }
-
-        public async Task<int> DeleteClient(int? id)
+        
+        public async Task<int> Delete(int id)
         {
             int result = 0;
             if (context != null)
@@ -43,7 +44,7 @@ namespace AirplaneTicketService.NewFolder
             return 0;
         }
 
-        public async Task<Models.Client> GetClient(int? id)
+        public async Task<Client> Retrieve(int id)
         {
             if (context != null)
             {
@@ -58,7 +59,7 @@ namespace AirplaneTicketService.NewFolder
             return null;
         }
 
-        public async Task<List<Models.Client>> GetClients()
+        public async Task<List<Client>> RetrieveAll()
         {
             if (context != null)
             {
@@ -66,8 +67,23 @@ namespace AirplaneTicketService.NewFolder
             }
             return null;
         }
+        public async Task<List<Client>> GetClientsByPassport(string passport)
+        {
+            if (context != null)
+            {
+                var clients = from m in context.Clients
+                              select m;
+                if (!String.IsNullOrEmpty(passport))
+                {
+                    clients = clients.Where(m => m.Passport.Contains(passport));
+                    return await clients.ToListAsync().ConfigureAwait(false);
+                }
+                //return null;
+            }
+            return null;
+        }
 
-        public async Task UpdateClient(Models.Client client)
+        public async Task Update(Client client)
         {
             if (context != null)
             {
@@ -75,5 +91,6 @@ namespace AirplaneTicketService.NewFolder
                 await context.SaveChangesAsync().ConfigureAwait(false);
             }
         }
+
     }
 }

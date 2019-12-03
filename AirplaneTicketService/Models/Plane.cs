@@ -18,6 +18,8 @@ namespace AirplaneTicketService.Models
 
         [DataType(DataType.Date)]
         public DateTime DayOfLastRepair { get; set; }
+
+        public List<Flight> Flights { get; set; }
     }
     //public class Employee
     //{
